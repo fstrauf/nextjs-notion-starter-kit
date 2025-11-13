@@ -1,0 +1,252 @@
+.scaler {
+  margin: 20px 0;
+  padding: 20px;
+  background: var(--bg-tertiary, #f9f9f9);
+  border-radius: 12px;
+  border: 1px solid var(--border-color, #e5e7eb);
+}
+
+.dark .scaler {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+/* Servings Control */
+.control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.label {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.controlGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dark .controlGroup {
+  background: #1a1a1a;
+  border-color: #555;
+}
+
+.button {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--accent-color, #f97316);
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background: var(--hover-bg, #f0f0f0);
+}
+
+.dark .button:hover {
+  background: #333;
+}
+
+.input {
+  width: 60px;
+  height: 36px;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  background: transparent;
+  color: var(--text-primary);
+}
+
+.input:focus {
+  outline: 2px solid var(--accent-color, #f97316);
+  outline-offset: -2px;
+}
+
+.ratio {
+  font-size: 12px;
+  color: var(--text-secondary, #666);
+  font-weight: 500;
+}
+
+/* Ingredients List */
+.ingredientsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ingredientItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.ingredientItem:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.dark .ingredientItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  margin-top: 4px;
+  cursor: pointer;
+  accent-color: var(--accent-color, #f97316);
+  flex-shrink: 0;
+}
+
+.ingredientLabel {
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.ingredientItem:has(.checkbox:checked) .ingredientLabel {
+  opacity: 0.6;
+  text-decoration: line-through;
+  color: var(--text-secondary, #999);
+}
+
+.quantity {
+  font-weight: 600;
+  min-width: 50px;
+  color: var(--accent-color, #f97316);
+}
+
+.unit {
+  min-width: 40px;
+  color: var(--text-secondary, #666);
+  font-size: 13px;
+}
+
+.ingredient {
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.notes {
+  color: var(--text-secondary, #999);
+  font-size: 13px;
+  font-style: italic;
+  margin-left: auto;
+}
+
+/* Show More / Show Less Buttons */
+.showMore,
+.showLess {
+  width: 100%;
+  padding: 10px;
+  margin-top: 12px;
+  background: var(--button-bg, #e5e7eb);
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--button-text, #4b5563);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.showMore:hover,
+.showLess:hover {
+  background: var(--button-hover-bg, #d1d5db);
+}
+
+.dark .showMore,
+.dark .showLess {
+  background: #444;
+  color: #ccc;
+}
+
+.dark .showMore:hover,
+.dark .showLess:hover {
+  background: #555;
+}
+
+/* Fallback for unparseable ingredients */
+.fallback {
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .scaler {
+    padding: 16px;
+  }
+
+  .control {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .ingredientLabel {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .quantity,
+  .unit,
+  .notes {
+    display: inline;
+  }
+
+  .notes {
+    margin-left: 0;
+    display: block;
+    margin-top: 4px;
+    margin-left: 28px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .control,
+  .showMore,
+  .showLess {
+    display: none;
+  }
+
+  .scaler {
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  .ingredientItem:has(.checkbox:checked) {
+    display: none;
+  }
+}

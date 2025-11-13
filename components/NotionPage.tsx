@@ -28,6 +28,8 @@ import { NotionPageHeader } from './NotionPageHeader'
 import { Page404 } from './Page404'
 import { PageAside } from './PageAside'
 import { PageHead } from './PageHead'
+import { RecipeScaler } from './RecipeScaler'
+import { RecipePageRenderer } from './RecipePageRenderer'
 import styles from './styles.module.css'
 
 // -----------------------------------------------------------------------------
@@ -140,6 +142,28 @@ function Tweet({ id }: { id: string }) {
     </React.Suspense>
   )
 }
+
+/**
+ * Custom text block handler that detects [[RECIPE_SCALER]] pattern
+ * and renders the interactive ingredient scaler component
+ */
+function RecipeScalerText({ children }: any) {
+  const childrenStr = String(children || '').toLowerCase().trim()
+
+  // Check if this is the recipe scaler trigger
+  if (!childrenStr.includes('[[recipe_scaler]]')) {
+    // Render normally if not the trigger
+    return <p>{children}</p>
+  }
+
+  // This is the recipe scaler trigger - render the component instead
+  return (
+    <div style={{ margin: '24px 0' }}>
+      <RecipeScaler ingredientsText="" originalServings={1} />
+    </div>
+  )
+}
+
 
 const propertyLastEditedTimeValue = (
   { block, pageHeader }: any,
@@ -323,6 +347,8 @@ export function NotionPageComponent({
           pageAside={pageAside}
           footer={footer}
         />
+
+      <RecipePageRenderer recordMap={recordMap} block={block} />
 
       <GitHubShareButton />
     </>
